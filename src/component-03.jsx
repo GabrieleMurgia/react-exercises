@@ -3,8 +3,8 @@ import { Hello } from "./component-02";
 
 export class App extends React.Component{
     render(){
-        <div>
-            <Hello></Hello>
-        </div>
+        return <div>
+        <Hello></Hello>
+            </div>
     }
 }
