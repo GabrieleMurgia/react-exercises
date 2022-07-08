@@ -9,7 +9,7 @@ export class Welcome extends React.Component{
             <div>
                 <p>Welcome, {this.props.name}! </p>
                  <Age age={this.props.age}/>
-                 <Counter></Counter>
+                 <Counter counter={0} increment={1} interval={1000}></Counter>
                  </div>
         )
     }
