@@ -1,6 +1,5 @@
 import  ReactDOM  from "react-dom";
-import { Hello } from "./component-02";
-import { App } from "./component-03";
+import { App } from "./App";
 
 const root = document.querySelector("#root");
 
