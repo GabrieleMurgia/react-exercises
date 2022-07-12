@@ -31,6 +31,7 @@ export class Login extends React.Component{
                 <label for="rememberCheckbox">Remember</label>
                 <input id="rememberCheckbox" type="checkbox"></input>
                 <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
+                <button onClick={ () => this.props.resetValue()}>Reset</button>
                </div>
     }
 }
@@ -45,8 +46,13 @@ export class App extends React.Component{
             console.log(obj)
             return obj
     }
+    resetValue = ()=>{
+        document.querySelectorAll("input").forEach(
+            input => (input.value = "")
+          );
+    }
     render(){
-        return <Login onLogin={this.onLogin} ></Login>
+        return <Login onLogin={this.onLogin} resetValue={this.resetValue}></Login>
     }
 }
 
