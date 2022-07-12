@@ -2,38 +2,32 @@ import React from "react";
 
 
 export class Login extends React.Component{
-
-    state = {
-        username:"",
-        password:"",
+        state = {
+            username:"",
+            password:"",
+        }
+    
+        handleInputs = (event)=>{
+            const value = event.target.value
+            const name = event.target.name
+                this.setState({
+                    ...this.state,
+                    [name]: value
+                })
+           
+            }   
+        render(){
+            return <div>
+                    <label >Username:</label>
+                    <input name="username" onChange={this.handleInputs}></input>
+                    <label >Password:</label>
+                    <input name="password" type="password" onChange={this.handleInputs}></input>
+                    <label >Remember</label>
+                    <input name="rememberCheckbox" type="checkbox"></input>
+                    <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
+                   </div>
+        }
     }
-
-    handleInputs = (event)=>{
-        
-        if(event.target.id == "username"){
-            this.setState({
-                ...this.state,
-                username: event.target.value
-            })
-        }else if(event.target.id == "password"){
-            this.setState({
-                ...this.state,
-                password: event.target.value
-            })
-        }   
-    }
-    render(){
-        return <div>
-                <label for="username">Username:</label>
-                <input id="username" onChange={this.handleInputs}></input>
-                <label for="password">Password:</label>
-                <input id="password" onChange={this.handleInputs}></input>
-                <label for="rememberCheckbox">Remember</label>
-                <input id="rememberCheckbox" type="checkbox"></input>
-                <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
-               </div>
-    }
-}
 export class App extends React.Component{
 
 
