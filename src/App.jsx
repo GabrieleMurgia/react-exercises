@@ -2,36 +2,39 @@ import React from "react";
 
 
 export class Login extends React.Component{
-
     state = {
         username:"",
         password:"",
+        remember:"",
+
     }
 
     handleInputs = (event)=>{
-        
-        if(event.target.id == "username"){
+        const value = event.target.value
+        const name = event.target.name
             this.setState({
                 ...this.state,
-                username: event.target.value
+                [name]: value
             })
-        }else if(event.target.id == "password"){
-            this.setState({
-                ...this.state,
-                password: event.target.value
-            })
-        }   
-    }
+        }  
+    handleCheck = (event)=>{
+        const checked = event.target.checked
+        const name = event.target.name
+
+        this.setState({
+            [name]:checked,
+        })
+    } 
     render(){
         return <div>
-                <label for="username">Username:</label>
-                <input id="username" onChange={this.handleInputs}></input>
-                <label for="password">Password:</label>
-                <input id="password" onChange={this.handleInputs}></input>
-                <label for="rememberCheckbox">Remember</label>
-                <input id="rememberCheckbox" type="checkbox"></input>
+                <label >Username:</label>
+                <input name="username" onChange={this.handleInputs} value={this.state.username}></input>
+                <label >Password:</label>
+                <input name="password" type="password" onChange={this.handleInputs} value={this.state.password}></input>
+                <label >Remember</label>
+                <input name="remember" type="checkbox" checked={this.state.remember} onChange={this.handleCheck}></input>
                 <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
-                <button onClick={ () => this.props.resetValue()}>Reset</button>
+                <button onClick={ () => this.props.resetValue(this)}>Reset</button>
                </div>
     }
 }
@@ -41,15 +44,18 @@ export class App extends React.Component{
     onLogin = (state)=>{
           const obj = {
                 username:state.username,
-                password:state.password
+                password:state.password,
+                remember:state.remember ? true : false
             }
             console.log(obj)
             return obj
     }
-    resetValue = ()=>{
-        document.querySelectorAll("input").forEach(
-            input => (input.value = "")
-          );
+    resetValue = (okok)=>{
+        okok.setState({
+            username:"",
+            password:"",
+            remember:""
+        })
     }
     render(){
         return <Login onLogin={this.onLogin} resetValue={this.resetValue}></Login>
