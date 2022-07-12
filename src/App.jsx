@@ -1,59 +1,41 @@
 import React from "react";
 
 
-export class Login extends React.Component{
+export class UncontrolledLogin extends React.Component{
+    handleFormSubmit = (event) => {
+        event.preventDefault()
 
-    state = {
-        username:"",
-        password:"",
-    }
+      const username =  event.target.elements.username.value
+      const password =  event.target.elements.password.value
+      const remember = event.target.elements.remember.checked
 
-    handleInputs = (event)=>{
-        
-        if(event.target.id == "username"){
-            this.setState({
-                ...this.state,
-                username: event.target.value
-            })
-        }else if(event.target.id == "password"){
-            this.setState({
-                ...this.state,
-                password: event.target.value
-            })
-        }   
+      console.log({
+        username,
+        password,
+        remember
+      })
     }
+    
     render(){
-        return <div>
-                <label for="username">Username:</label>
-                <input id="username" onChange={this.handleInputs}></input>
-                <label for="password">Password:</label>
-                <input id="password" onChange={this.handleInputs}></input>
-                <label for="rememberCheckbox">Remember</label>
-                <input id="rememberCheckbox" type="checkbox"></input>
-                <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
-                <button onClick={ () => this.props.resetValue()}>Reset</button>
-               </div>
+        return(
+            <div>
+
+                <form onSubmit={this.handleFormSubmit}>
+                <input name="username"/>
+                <input name="password" type="password"/>
+                <input name="remember" type="checkbox"/>
+
+                <button type="submit">Login</button>
+                <button type="reset">Reset</button>
+                </form>
+            </div>
+        )
     }
 }
+
 export class App extends React.Component{
 
-
-    onLogin = (state)=>{
-          const obj = {
-                username:state.username,
-                password:state.password
-            }
-            console.log(obj)
-            return obj
-    }
-    resetValue = ()=>{
-        document.querySelectorAll("input").forEach(
-            input => (input.value = "")
-          );
-    }
     render(){
-        return <Login onLogin={this.onLogin} resetValue={this.resetValue}></Login>
+        return <UncontrolledLogin onLogin={this.onLogin} resetValue={this.resetValue}></UncontrolledLogin>
     }
 }
-
-
