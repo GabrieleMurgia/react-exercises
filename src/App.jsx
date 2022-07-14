@@ -19,9 +19,9 @@ export class Login extends React.Component{
         render(){
             return <div>
                     <label >Username:</label>
-                    <input name="username" onChange={this.handleInputs}></input>
+                    <input name="username" onChange={this.handleInputs} value={this.state.username}></input>
                     <label >Password:</label>
-                    <input name="password" type="password" onChange={this.handleInputs}></input>
+                    <input name="password" type="password" onChange={this.handleInputs} value={this.state.password}></input>
                     <label >Remember</label>
                     <input name="rememberCheckbox" type="checkbox"></input>
                     <button onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
