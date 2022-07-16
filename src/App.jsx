@@ -25,7 +25,7 @@ export class TodoList extends React.Component{
               } 
             </ul>
              <form onSubmit={this.submitHandler}>
-                <input onChange={this.inputHandler}></input>
+                <input  value={this.state.userInput} onChange={this.inputHandler}></input>
                 <button type="submit">Submit</button>
              </form>
           </div>
