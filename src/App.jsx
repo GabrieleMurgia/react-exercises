@@ -21,12 +21,30 @@ export class TodoList extends React.Component{
           items:[]
         })
       }
+      handleDelete = (event)=>{
+        let textContentLiAndButton = event.target.parentElement.textContent
+        let array = textContentLiAndButton.split(" ")
+        array.splice(-1,1)
+        let textContentLi = array.join(" ");
+        console.log(textContentLi)
+        let stateClone = [...this.state.items]
+        let index = stateClone.indexOf(textContentLi)
+        stateClone.splice(index,1)
+        console.log(stateClone)
+        this.setState({
+          items:stateClone
+        })
+
+       
+
+        
+      }
       render() {
         return (
           <div>
             <ul>
               {
-                this.state.items.map((li,key) => <li {...{key}}>{li}</li>)
+                this.state.items.map((li,key) =>  <li {...{key}}>{li} <button onClick={this.handleDelete}>Elimina</button></li>)
               } 
             </ul>
              <form onSubmit={this.submitHandler}>
