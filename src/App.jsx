@@ -2,7 +2,7 @@ import React from "react";
 export class TodoList extends React.Component{
     state = {
         items: [],
-        userInput: '',
+        userInput:'',
       }
       inputHandler = (event)=>{
       this.setState({
@@ -14,6 +14,11 @@ export class TodoList extends React.Component{
         this.setState({
             items:[...this.state.items,this.state.userInput],
             userInput:"",
+        })
+      }
+      handleReset = ()=>{
+        this.setState({
+          items:[]
         })
       }
       render() {
@@ -28,6 +33,7 @@ export class TodoList extends React.Component{
                 <input  value={this.state.userInput} onChange={this.inputHandler}></input>
                 <button type="submit">Submit</button>
              </form>
+             <button onClick={this.handleReset}>Reset UL</button>
           </div>
         )
       }
@@ -35,6 +41,6 @@ export class TodoList extends React.Component{
 
 export class App extends React.Component{
     render(){
-        return <TodoList ></TodoList>
+        return <TodoList></TodoList>
     }
 }
