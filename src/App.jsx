@@ -3,15 +3,14 @@ import React from "react";
 
 export class Container extends React.Component{
   render(){
-
     return (
       <div className="component-class">
-        {this.props.children}
+      <div className="component-title">{this.props.title}</div>
+       <div className="component-body">{this.props.children}</div>
       </div>
     )
   }
 }
-
 export class HelloWorld extends React.Component{
   render(){
     return(
@@ -21,13 +20,9 @@ export class HelloWorld extends React.Component{
     )
   }
 }
-
 export class App extends React.Component{
-
-
-
     render(){
-        return <Container>
+        return <Container title="Che bel titolo">
             <HelloWorld></HelloWorld>
               </Container>
     }
