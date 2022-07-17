@@ -1,8 +1,7 @@
 
 .component-class{
-    background-color:rgb(28, 154, 154);
-    border: 2px solid rgb(1, 28, 28);
-    color: white;
+    background-color:rgb(255, 255, 255);
+    border: 2px solid rgb(255, 4, 4);
     font-size: 30px;
     width: 13%;
 }
