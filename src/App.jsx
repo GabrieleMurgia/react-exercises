@@ -1,15 +1,53 @@
 import React from "react";
 
-export class Welcome extends React.Component{
-    render(){
-        return(
-            <p className="component-class">Welcome, Gennaro</p>
-        )
-    }
-}
 
+export class Login extends React.Component{
+        state = {
+            username:"",
+            password:"",
+        }
+    
+        handleInputs = (event)=>{
+            const value = event.target.value
+            const name = event.target.name
+                this.setState({
+                    ...this.state,
+                    [name]: value
+                })
+            }  
+            
+          
+        render(){
+
+          const MyStyle = {
+            background: this.state.password.length < 8 ? "red" : "green",
+            color: "white",
+            border: "2px solid black"
+          }
+            return <div>
+                    <label >Username:</label>
+                    <input name="username" onChange={this.handleInputs} value={this.state.username}></input>
+                    <label >Password:</label>
+                    <input name="password" type="password" onChange={this.handleInputs} value={this.state.password}></input>
+                    <label >Remember</label>
+                    <input name="rememberCheckbox" type="checkbox"></input>
+                    <button style={MyStyle}
+                    onClick={() => this.props.onLogin(this.state)} disabled={!(this.state.password && this.state.username)}>Login</button>
+                   </div>
+        }
+    }
 export class App extends React.Component{
+
+
+    onLogin = (state)=>{
+          const obj = {
+                username:state.username,
+                password:state.password
+            }
+            console.log(obj)
+            return obj
+    }
     render(){
-        return <Welcome></Welcome>
+        return <Login onLogin={this.onLogin} ></Login>
     }
 }
