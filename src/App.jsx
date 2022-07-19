@@ -20,17 +20,16 @@ export class TodoList extends React.Component{
         console.log("ciao",this.state.userInput,this.props.items)
       }
       handleReset = ()=>{
-        this.setState({
-          items:[]
-        })
+       this.setState({
+        items:[this.props.items.splice(0,this.props.items.length)]
+       })
       } 
+     
       render() {
         return (
           <div>
           <ul>
-          {
-               this.props.items.map((li,key) =>  <li {...{key}}>{li} <button onClick={this.props.handleDelete}>Elimina</button></li>)
-              } 
+          {this.props.items.map((li,key) =>  <li {...{key}}>{li} <button onClick={this.props.handleDelete}>Elimina</button></li>)} 
           </ul>
              <form onSubmit={this.submitHandler}>
                 <input  value={this.state.userInput} onChange={this.inputHandler}></input>
@@ -44,11 +43,9 @@ export class TodoList extends React.Component{
 
 export class Wrapper extends React.Component{
 
-  state = {
-    items: [],
-    userInput:'',
-  }
-  handleDelete = (event)=>{
+  state = {items: [],userInput:'',}
+
+  handleDelete = (event) => {
     let textContentLiAndButton = event.target.parentElement.textContent
     let array = textContentLiAndButton.split(" ")
     array.splice(-1,1)
@@ -57,21 +54,26 @@ export class Wrapper extends React.Component{
     let stateClone = [...this.state.items]
     let index = stateClone.indexOf(textContentLi)
     stateClone.splice(index,1)
-    console.log(stateClone)
     this.setState({
       items:stateClone
     })        
   }
-
   render(){
-    return( <div>{this.props.render(this.state.items,this.handleDelete)}</div>)
+    return(
+
+      <div> {this.props.render(this.state.items,this.handleDelete)}</div>
+    )
   }
 }
 
 export class App extends React.Component{
     render(){
-        return <Wrapper render={(items,handleDelete)=> {
-          return <TodoList items={items} handleDelete={handleDelete}></TodoList>
-        }}></Wrapper>
+        return <div>
+          <Wrapper render={(items,handleDelete)=>{
+           return <TodoList items={items} handleDelete={handleDelete}></TodoList>
+          }
+          }></Wrapper>
+        </div>
+        
     }
 }
